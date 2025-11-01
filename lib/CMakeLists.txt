@@ -12,6 +12,11 @@ set(LLVM_TUTOR_PLUGINS
     DuplicateBB
     OpcodeCounter
     MergeBB
+    DefUseChains
+    LoopInfoExample
+    AffineRecurrence
+    DerivedInductionVar
+    SimpleLICM
     )
 
 set(StaticCallCounter_SOURCES
@@ -36,6 +41,16 @@ set(OpcodeCounter_SOURCES
   OpcodeCounter.cpp)
 set(MergeBB_SOURCES
   MergeBB.cpp)
+set(DefUseChains_SOURCES
+  DefUseChains.cpp)
+set(LoopInfoExample_SOURCES
+  LoopInfoExample.cpp)
+set(AffineRecurrence_SOURCES
+  AffineRecurrence.cpp)
+set(DerivedInductionVar_SOURCES
+  DerivedInductionVar.cpp)
+set(SimpleLICM_SOURCES
+  SimpleLICM.cpp)
 
 # CONFIGURE THE PLUGIN LIBRARIES
 # ==============================
