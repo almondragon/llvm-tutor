@@ -3,6 +3,10 @@
 
 This repository contains a framework for constructing and running passes on C files. For this particular assignment, the code implements a loop invariant code motion (LICM) pass and a induction variable elimination (IVE) pass.
 
+The files for the assignment can be found in /lib.
+1. SimpleLICM - /lib/SimpleLICM.cpp
+2. DerivedInductionVar - /lib/DerivedInductionVar.cpp
+
 NOTE: The original README.md of this framework can be found in the original repo at https://github.com/banach-space/llvm-tutor
 
 All llvm-tutor applications are courtesy of: https://github.com/banach-space/llvm-tutor
