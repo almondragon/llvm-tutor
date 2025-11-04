@@ -72,8 +72,14 @@ $LLVM_DIR/bin/opt   -load-pass-plugin ./lib/libDerivedInductionVar.so   -passes=
 If running on mac, ensure the library variable is correct and .so for passes is changed to .dylib prior to running testing.sh.
 
 ### Testing
-Use the following commands to run the test cases:
+Ensure you are in the llvm-tutor directory and not any subdirectories. Use the following commands to run the test cases:
 ```bash
+chmod +x testing.sh
+./testing.sh
+```
+If not in the /llvm-tutor directory, run the following commands:
+```bash
+cd ..
 chmod +x testing.sh
 ./testing.sh
 ```

@@ -24,8 +24,8 @@ November 3, 2025
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
-#include "llvm/Transforms/Utils/ScalarEvolutionExpander.h"
-#include "llvm/IR/IRBuilder.h"
+#include "llvm/Transforms/Utils/ScalarEvolutionExpander.h"//added for ive
+#include "llvm/IR/IRBuilder.h" // added for ive
 #include "llvm/ADT/SmallVector.h"
 
 using namespace llvm;
@@ -68,10 +68,12 @@ private:
     errs() << indent << "Analyzing loop in function " << FunctionName
            << " (depth " << Depth << ")\n";
 
+    
     for (PHINode &PN : Header->phis()) {
       if (!PN.getType()->isIntegerTy())
         continue;
       const SCEV *S = SE.getSCEV(&PN);
+      // seeing if affine
       if (auto *AR = dyn_cast<SCEVAddRecExpr>(S)) {
         const SCEV *Step = AR->getStepRecurrence(SE);
         const SCEV *Start = AR->getStart();
@@ -82,7 +84,7 @@ private:
         }
       }
     }
-
+    // recurisve call
     for (Loop *SubLoop : L->getSubLoops())
       analyzeLoopRecursive(SubLoop, SE, FunctionName, Depth + 1);
   }
@@ -179,7 +181,7 @@ private:
 
       const SCEV *Step = AR->getStepRecurrence(SE);
       
-      // Skip likely-basic IVs with step == 1 --> preserving canoncical ivs
+      // Skip basic ivs
       if (auto *C = dyn_cast<SCEVConstant>(Step)) {
         if (C->getAPInt() == 1) {
           errs() << "    Skipping likely-basic IV: " << PN->getName() << "\n";
@@ -189,7 +191,7 @@ private:
 
       errs() << "    Expanding derived IV " << PN->getName() << " : " << *AR << "\n";
 
-      // Expand the AddRec into IR at the header insertion point
+      // Expand the AddRec into IR
       Value *NewVal = Expander.expandCodeFor(AR, PN->getType(), HeaderInsert);
       if (!NewVal) {
         errs() << "      Expansion failed for " << PN->getName() << "\n";
@@ -210,7 +212,7 @@ private:
       errs() << "    Erasing PHI: " << PN->getName() << "\n";
       PN->eraseFromParent();
     }
-
+    //recursive call
     for (Loop *SubLoop : L->getSubLoops()) {
       if (eliminateIV(SubLoop, SE))
         Changed = true;
