@@ -39,7 +39,7 @@ make
 
 2. **DerivedInductionVar Pass** - runs a induction variable elimination pass on a given C file.
 
-**NOTE** All given C files must be canonical for optimal results.
+**NOTE** All given C files must be canonical for optimal results. Additionally, all input files can be found in /llvm-tutor/inputs and all output files can be found in /llvm-tutor/outputs.
 
 
 ## Usage
